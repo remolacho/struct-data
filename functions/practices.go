@@ -11,19 +11,19 @@ func ArrayMethods() {
 	numbers.Add(-5)
 	numbers.Add(9)
 
-	//fmt.Printf("%v Size \n", numbers.Size())
-	//fmt.Printf("%v Min \n", numbers.Min())
-	//fmt.Printf("%v Max \n", numbers.Max())
-	//fmt.Printf("%v Avg \n", numbers.Avg())
-	//fmt.Printf("%v Sum \n", numbers.Sum())
-	//fmt.Printf("%v FindAll \n", numbers.FindAll(9))
-	//fmt.Printf("%v Find \n", numbers.Find(9))
-	//fmt.Printf("%v Detect \n", numbers.Detect(9))
-	//fmt.Printf("%v Sort Asc \n", numbers.SortAsc())
-	//fmt.Printf("%v Sort Desc \n", numbers.SortDesc())
-	//fmt.Printf("%v Sort Selection \n", numbers.SortSelection())
-	//fmt.Printf("%v Sort Insertion \n", numbers.SortByInsertion())
-	//fmt.Printf("%v Sort SortByDoubleRun \n", numbers.SortByDoubleRun())
+	fmt.Printf("%v Size \n", numbers.Size())
+	fmt.Printf("%v Min \n", numbers.Min())
+	fmt.Printf("%v Max \n", numbers.Max())
+	fmt.Printf("%v Avg \n", numbers.Avg())
+	fmt.Printf("%v Sum \n", numbers.Sum())
+	fmt.Printf("%v FindAll \n", numbers.FindAll(9))
+	fmt.Printf("%v Find \n", numbers.Find(9))
+	fmt.Printf("%v Detect \n", numbers.Detect(9))
+	fmt.Printf("%v Sort Asc \n", numbers.SortAsc())
+	fmt.Printf("%v Sort Desc \n", numbers.SortDesc())
+	fmt.Printf("%v Sort Selection \n", numbers.SortSelection())
+	fmt.Printf("%v Sort Insertion \n", numbers.SortByInsertion())
+	fmt.Printf("%v Sort SortByDoubleRun \n", numbers.SortByDoubleRun())
 	fmt.Printf("%v DeleteInCopy element \n", numbers.DeleteInCopy(7))
 	fmt.Printf("%v Origin Values \n", numbers.Values())
 	fmt.Printf("%v Delete element \n", numbers.Delete(7))
@@ -149,4 +149,36 @@ func OpenAndClose(str string, strOpen string) {
 	} else {
 		fmt.Printf("No esta homolagada \n")
 	}
+}
+
+func Hanoi(n int, origin int, destiny int, aux int) {
+	if n > 0 {
+		Hanoi(n-1, origin, aux, destiny)
+		fmt.Printf("se mueve el disco de la pocxision %d a la %d \n", origin, destiny)
+		Hanoi(n-1, aux, destiny, origin)
+	}
+}
+
+func Recursive() {
+	numbers := arrayInteger.InitValues([]int{6, 3, 9, 11, 18, 21, 30})
+	fmt.Printf("%b \n", TwoSum(numbers, 21))
+}
+
+func TwoSum(array *arrayInteger.Array, target int) bool {
+	fmt.Printf("array %v, target %d \n", array, target)
+
+	if target == 0 || array.Size() == 1 {
+		return false
+	}
+
+	pivot := array.Values()[0]
+	array.Shift()
+
+	for i := 0; i <= array.Size()-1; i++ {
+		if array.Values()[i]+pivot == target {
+			return true
+		}
+	}
+
+	return TwoSum(array, target)
 }

@@ -9,5 +9,7 @@ func main() {
 	//functions.OpenAndClose("{{{}}}", "{")
 	//functions.Palindrome("anilina")
 	//functions.Palindrome2("anilina")
-	functions.ArrayMethods()
+	//functions.ArrayMethods()
+	//functions.Hanoi(4, 1, 3, 2)
+	functions.Recursive()
 }

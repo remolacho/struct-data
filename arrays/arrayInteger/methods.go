@@ -10,9 +10,11 @@ type Array struct {
 
 func New() *Array {
 	var initArray []int
-	a := Array{object: initArray}
+	return &Array{object: initArray}
+}
 
-	return &a
+func InitValues(array []int) *Array {
+	return &Array{object: array}
 }
 
 func (a *Array) Rand(size int) {
@@ -33,6 +35,14 @@ func (a *Array) Add(value int) *Array {
 func (a *Array) Delete(index int) []int {
 	a.object = append(a.object[:index], a.object[index+1:]...)
 	return a.object
+}
+
+func (a *Array) Shift() []int {
+	return a.Delete(0)
+}
+
+func (a *Array) Pop() []int {
+	return a.Delete(a.Size() - 1)
 }
 
 func (a *Array) DeleteInCopy(index int) []int {
