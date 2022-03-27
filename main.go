@@ -11,5 +11,7 @@ func main() {
 	//functions.Palindrome2("anilina")
 	//functions.ArrayMethods()
 	//functions.Hanoi(4, 1, 3, 2)
-	functions.Recursive()
+	//functions.Recursive()
+	//functions.MatrixPow()
+	functions.ThreeInLine()
 }
