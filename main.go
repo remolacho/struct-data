@@ -1,6 +1,8 @@
 package main
 
-import "struct-data/functions"
+import (
+	"struct-data/functions"
+)
 
 func main() {
 	//functions.PerfectNumber(6)

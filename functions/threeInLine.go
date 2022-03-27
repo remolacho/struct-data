@@ -2,19 +2,22 @@ package functions
 
 import (
 	"fmt"
+	tm "github.com/buger/goterm"
 	"strconv"
 	"strings"
+	"time"
 )
 
 var matrix [3][3]string
 var charPlayer1 string
 var charPlayer2 string
-var playerNmae1 string
-var playerNmae2 string
+var playerName1 string
+var playerName2 string
 var hasValues int
 var top int
 
 func ThreeInLine() {
+	clearTerm()
 	settingPlayers()
 	play()
 	assignIndex()
@@ -23,16 +26,16 @@ func ThreeInLine() {
 
 func settingPlayers() {
 	fmt.Printf("Elegir un nombre para el jugador 1 \n")
-	fmt.Scanf("%s\n", &playerNmae1)
+	fmt.Scanf("%s\n", &playerName1)
 
 	fmt.Printf("Elegir un nombre para el jugador 2 \n")
-	fmt.Scanf("%s\n", &playerNmae2)
+	fmt.Scanf("%s\n", &playerName2)
 
 	char1 := "X"
-	char2 := "-"
+	char2 := "O"
 
 	for charPlayer1 != char1 && charPlayer1 != char2 {
-		fmt.Printf("%s Elige entre %s y %s \n", playerNmae1, char1, char2)
+		fmt.Printf("%s Elige entre %s y %s \n", playerName1, char1, char2)
 		fmt.Scanf("%s\n", &charPlayer1)
 		charPlayer1 = strings.ToUpper(charPlayer1)
 	}
@@ -43,8 +46,10 @@ func settingPlayers() {
 		charPlayer2 = char1
 	}
 
-	fmt.Printf("---- Al %s se asigna %s \n", playerNmae1, charPlayer1)
-	fmt.Printf("---- Al %s se asigna %s \n", playerNmae2, charPlayer2)
+	clearTerm()
+
+	fmt.Printf("---- Al %s se asigna %s \n", playerName1, charPlayer1)
+	fmt.Printf("---- Al %s se asigna %s \n", playerName2, charPlayer2)
 }
 
 func play() {
@@ -61,7 +66,7 @@ func play() {
 }
 
 func assignIndex() {
-	if playPlayer(charPlayer1, playerNmae1) || playPlayer(charPlayer2, playerNmae2) {
+	if playPlayer(charPlayer1, playerName1) || playPlayer(charPlayer2, playerName2) {
 		return
 	}
 
@@ -77,6 +82,7 @@ func playPlayer(player string, playerName string) bool {
 		printMatrix()
 		fmt.Scanf("%s\n", &index)
 		indexValid = findValue(index, player)
+		clearTerm()
 	}
 
 	if win(player) {
@@ -181,10 +187,19 @@ func tie() bool {
 }
 
 func printMatrix() {
+	fmt.Println("-------------")
 	for i := 0; i < top; i++ {
 		for j := 0; j < top; j++ {
 			fmt.Printf("| %s ", matrix[i][j])
 		}
 		fmt.Println("|")
+		fmt.Println("-------------")
 	}
+}
+
+func clearTerm() {
+	tm.Clear() // Clear current screen
+	tm.MoveCursor(1, 1)
+	tm.Flush() // Call it every time at the end of rendering
+	time.Sleep(time.Second / 2)
 }
