@@ -61,15 +61,11 @@ func play() {
 }
 
 func assignIndex() {
-	for true {
-		if playPlayer(charPlayer1, playerNmae1) {
-			return
-		}
-
-		if playPlayer(charPlayer2, playerNmae2) {
-			return
-		}
+	if playPlayer(charPlayer1, playerNmae1) || playPlayer(charPlayer2, playerNmae2) {
+		return
 	}
+
+	assignIndex()
 }
 
 func playPlayer(player string, playerName string) bool {
@@ -83,12 +79,12 @@ func playPlayer(player string, playerName string) bool {
 		indexValid = findValue(index, player)
 	}
 
-	if finished(player) {
+	if win(player) {
 		fmt.Printf("En hora buena %s = %s haz ganado!!!!! \n", playerName, player)
 		return true
 	}
 
-	if hasValues == 0 {
+	if tie() {
 		fmt.Println("Termina en empate!!!!!")
 		return true
 	}
@@ -110,7 +106,7 @@ func findValue(index string, player string) bool {
 	return false
 }
 
-func finished(charPlayer string) bool {
+func win(charPlayer string) bool {
 	if findRow(charPlayer) || findColumn(charPlayer) || findLeft(charPlayer) || findRight(charPlayer) {
 		return true
 	} else {
@@ -174,6 +170,14 @@ func findRight(charPlayer string) bool {
 	}
 
 	return true
+}
+
+func tie() bool {
+	if hasValues == 0 {
+		return true
+	} else {
+		return false
+	}
 }
 
 func printMatrix() {
