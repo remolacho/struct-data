@@ -66,16 +66,18 @@ func (l *List) Add(name string, quantity int) {
 }
 
 func (l *List) Delete(index int) {
-	if index < 1 || index > l.Size() {
+	positionRoot := 1
+
+	if index < positionRoot || index > l.Size() {
 		return
 	}
 
-	if index == 1 {
+	if index == positionRoot {
 		root = root.next
 		return
 	}
 
-	destroyItem(index, 2, root)
+	destroyItem(index, positionRoot+1, root)
 }
 
 func destroyItem(index int, position int, item *Item) {
@@ -93,6 +95,5 @@ func destroyItem(index int, position int, item *Item) {
 		item = item.next
 	}
 
-	position++
-	destroyItem(index, position, item)
+	destroyItem(index, position+1, item)
 }
