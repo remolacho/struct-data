@@ -25,7 +25,23 @@ func (l *List) All() {
 	}
 }
 
-func (l *List) Insert(name string, quantity int) {
+func (l *List) Size() int {
+	var item *Item = root
+	index := 1
+
+	if item == nil {
+		return 0
+	}
+
+	for item.next != nil {
+		index++
+		item = item.next
+	}
+
+	return index
+}
+
+func (l *List) Add(name string, quantity int) {
 	var item Item
 	item.name = name
 	item.quantity = quantity
@@ -50,16 +66,20 @@ func (l *List) Insert(name string, quantity int) {
 }
 
 func (l *List) Delete(index int) {
-	if index < 0 || index > l.Size()-1 {
+	if index < 1 || index > l.Size() {
 		return
 	}
 
-	if index == 0 {
+	if index == 1 {
 		root = root.next
 		return
 	}
 
-	var position int = 1
+	destroyItem(index)
+}
+
+func destroyItem(index int) {
+	var position int = 2
 	var item *Item = root
 
 	for {
@@ -79,20 +99,4 @@ func (l *List) Delete(index int) {
 
 		position++
 	}
-}
-
-func (l *List) Size() int {
-	var item *Item = root
-	index := 1
-
-	if item == nil {
-		return 0
-	}
-
-	for item.next != nil {
-		index++
-		item = item.next
-	}
-
-	return index
 }
