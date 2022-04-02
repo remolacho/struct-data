@@ -25,6 +25,6 @@ func main() {
 	l.Add("Cocacola", 1)
 	l.All()
 	fmt.Println("######################################################")
-	l.Delete(2)
+	l.Delete(1)
 	l.All()
 }

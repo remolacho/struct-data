@@ -75,28 +75,24 @@ func (l *List) Delete(index int) {
 		return
 	}
 
-	destroyItem(index)
+	destroyItem(index, 2, root)
 }
 
-func destroyItem(index int) {
-	var position int = 2
-	var item *Item = root
-
-	for {
-		if position == index {
-			if item.next.next == nil {
-				item.next = nil
-			} else {
-				item.next = item.next.next
-			}
-
-			break
+func destroyItem(index int, position int, item *Item) {
+	if position == index {
+		if item.next.next == nil {
+			item.next = nil
+		} else {
+			item.next = item.next.next
 		}
 
-		if item != nil {
-			item = item.next
-		}
-
-		position++
+		return
 	}
+
+	if item != nil {
+		item = item.next
+	}
+
+	position++
+	destroyItem(index, position, item)
 }
