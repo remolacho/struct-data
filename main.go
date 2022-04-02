@@ -1,7 +1,8 @@
 package main
 
 import (
-	"struct-data/functions"
+	"fmt"
+	list "struct-data/list"
 )
 
 func main() {
@@ -15,5 +16,15 @@ func main() {
 	//functions.Hanoi(4, 1, 3, 2)
 	//functions.Recursive()
 	//functions.MatrixPow()
-	functions.ThreeInLine()
+	//functions.ThreeInLine()
+
+	l := list.New()
+	l.Insert("Agua", 4)
+	l.Insert("Chocolate", 3)
+	l.Insert("Pizza", 1)
+	l.Insert("Cocacola", 1)
+	l.All()
+	fmt.Println("######################################################")
+	l.Delete(2)
+	l.All()
 }
